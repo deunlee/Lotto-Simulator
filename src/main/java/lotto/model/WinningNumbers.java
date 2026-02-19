@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +9,11 @@ public class WinningNumbers {
     private final LottoNumbers numbers;
     private final LottoNumber bonus;
 
-    public WinningNumbers(List<Integer> numbers, Integer bonusNumber) {
+    public WinningNumbers(Integer bonusNumber, int... numbers) {
+        this(Arrays.stream(numbers).boxed().toList(), bonusNumber);
+    }
+
+    public WinningNumbers(final List<Integer> numbers, Integer bonusNumber) {
         // 보너스 번호 중복 검증
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 중복될 수 없습니다.");

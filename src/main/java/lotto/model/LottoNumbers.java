@@ -1,5 +1,6 @@
 package lotto.model;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -8,6 +9,10 @@ public class LottoNumbers {
     public static final int LOTTO_SIZE = 6;
 
     private final List<LottoNumber> numbers;
+
+    public LottoNumbers(final int... numbers) {
+        this(Arrays.stream(numbers).boxed().toList());
+    }
 
     public LottoNumbers(final List<Integer> numbers) {
         // 숫자 개수 검증
