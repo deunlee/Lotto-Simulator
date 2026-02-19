@@ -42,7 +42,6 @@ class OutputViewTest {
         );
 
         outputView.printStatistics(resultCountByRank, 1.23);
-
         String output = outputStream.toString();
         assertTrue(output.contains("당첨 통계"));
         assertTrue(output.contains("3개 일치"));

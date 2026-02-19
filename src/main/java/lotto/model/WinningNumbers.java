@@ -26,14 +26,14 @@ public class WinningNumbers {
         return bonus.value();
     }
 
-    public LottoResult compare(LottoNumbers other) {
+    public LottoResult compare(final LottoNumbers other) {
         final List<Integer> otherNumbers = other.getNumbers();
         int matchCount = calculateIntersectionSize(otherNumbers);
         boolean isBonusMatched = otherNumbers.contains(bonus.value());
         return determineResult(matchCount, isBonusMatched);
     }
 
-    private int calculateIntersectionSize(List<Integer> otherNumbers) {
+    private int calculateIntersectionSize(final List<Integer> otherNumbers) {
         return (int) numbers.getNumbers()
             .stream()
             .filter(otherNumbers::contains)
@@ -49,7 +49,7 @@ public class WinningNumbers {
         return LottoResult.RANK_NONE;
     }
 
-    public Map<LottoResult, Integer> countByRank(List<LottoNumbers> purchasedNumbers) {
+    public Map<LottoResult, Integer> countByRank(final List<LottoNumbers> purchasedNumbers) {
         Map<LottoResult, Integer> rank = new HashMap<>();
         for (LottoNumbers numbers : purchasedNumbers) {
             final LottoResult result = compare(numbers);
