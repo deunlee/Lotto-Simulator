@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.LottoNumber;
 import lotto.model.LottoNumbers;
 
 import java.util.ArrayList;
@@ -45,8 +46,7 @@ public class InputManualView {
         try {
             String lottoInput = scanner.nextLine();
             validateLottoInputFormat(lottoInput);
-            List<Integer> numbers = parseLottoNumbers(lottoInput);
-            return new LottoNumbers(numbers);
+            return new LottoNumbers(parseLottoNumbers(lottoInput));
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -76,14 +76,14 @@ public class InputManualView {
         }
     }
 
-    private List<Integer> parseLottoNumbers(String lottoInput) {
-        String[] tokens = lottoInput.split(",");
+    private List<LottoNumber> parseLottoNumbers(String lottoInput) {
+        final String[] tokens = lottoInput.split(",");
         if (tokens.length != LottoNumbers.LOTTO_SIZE) {
             throw new IllegalArgumentException("로또 번호는 숫자 " + LottoNumbers.LOTTO_SIZE + "개를 입력해야 합니다.");
         }
-        List<Integer> numbers = new ArrayList<>();
+        final List<LottoNumber> numbers = new ArrayList<>();
         for (final String token : tokens) {
-            numbers.add(Integer.parseInt(token.trim()));
+            numbers.add(LottoNumber.of(Integer.parseInt(token.trim())));
         }
         return numbers;
     }

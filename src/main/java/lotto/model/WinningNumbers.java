@@ -10,16 +10,16 @@ public class WinningNumbers {
     private final LottoNumber bonus;
 
     public WinningNumbers(Integer bonusNumber, int... numbers) {
-        this(Arrays.stream(numbers).boxed().toList(), bonusNumber);
+        this(Arrays.stream(numbers).mapToObj(LottoNumber::of).toList(), LottoNumber.of(bonusNumber));
     }
 
-    public WinningNumbers(final List<Integer> numbers, Integer bonusNumber) {
+    public WinningNumbers(final List<LottoNumber> numbers, final LottoNumber bonusNumber) {
         // 보너스 번호 중복 검증
         if (numbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 중복될 수 없습니다.");
         }
         this.numbers = new LottoNumbers(numbers);
-        this.bonus = LottoNumber.of(bonusNumber);
+        this.bonus = bonusNumber;
     }
 
     public int getBonusNumber() {

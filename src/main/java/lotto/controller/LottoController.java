@@ -61,8 +61,8 @@ public class LottoController {
     }
 
     private WinningNumbers doInputWinningNumbers() {
-        List<Integer> numbers = inputHistoryView.inputWinningNumbers();
-        int bonusNumber = inputHistoryView.inputBonusNumber(numbers);
+        List<LottoNumber> numbers = inputHistoryView.inputWinningNumbers();
+        LottoNumber bonusNumber = inputHistoryView.inputBonusNumber(numbers);
         return new WinningNumbers(numbers, bonusNumber);
     }
 

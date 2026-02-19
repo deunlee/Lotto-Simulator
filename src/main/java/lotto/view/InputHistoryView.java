@@ -14,11 +14,11 @@ public class InputHistoryView {
         this.scanner = new Scanner(System.in);
     }
 
-    public List<Integer> inputWinningNumbers() {
+    public List<LottoNumber> inputWinningNumbers() {
         try {
             System.out.println("지난 주 당첨 번호를 입력해 주세요.");
             String[] winningNumbers = scanner.nextLine().split(",");
-            List<Integer> parsedWinningNumbers = parseWinningNumbers(winningNumbers);
+            List<LottoNumber> parsedWinningNumbers = parseWinningNumbers(winningNumbers);
             validateWinningNumbersDistinct(parsedWinningNumbers);
             return parsedWinningNumbers;
         } catch (Exception e) {
@@ -27,10 +27,10 @@ public class InputHistoryView {
         }
     }
 
-    public int inputBonusNumber(List<Integer> winningNumbers) {
+    public LottoNumber inputBonusNumber(List<LottoNumber> winningNumbers) {
         try {
             System.out.println("보너스 볼을 입력해 주세요.");
-            int bonusNumber = parseBonusNumber(scanner.nextLine());
+            final LottoNumber bonusNumber = parseBonusNumber(scanner.nextLine());
             validateBonusNumberDistinct(winningNumbers, bonusNumber);
             return bonusNumber;
         } catch (Exception e) {
@@ -39,43 +39,41 @@ public class InputHistoryView {
         }
     }
 
-    private List<Integer> parseWinningNumbers(String[] winningNumbers) {
+    private static List<LottoNumber> parseWinningNumbers(String[] winningNumbers) {
         if (winningNumbers.length != LottoNumbers.LOTTO_SIZE) {
             throw new IllegalArgumentException("당첨 번호는 숫자 " + LottoNumbers.LOTTO_SIZE + "개를 입력해야 합니다.");
         }
-        List<Integer> parsedWinningNumbers = new ArrayList<>();
+        final List<LottoNumber> result = new ArrayList<>();
         for (final String number : winningNumbers) {
-            parsedWinningNumbers.add(parseWinningNumber(number));
+            result.add(parseWinningNumber(number));
         }
-        return parsedWinningNumbers;
+        return result;
     }
 
-    private int parseWinningNumber(String winningNumber) {
+    private static LottoNumber parseWinningNumber(String number) {
         try {
-            int value = Integer.parseInt(winningNumber.trim());
-            return LottoNumber.of(value).value();
+            return LottoNumber.of(Integer.parseInt(number.trim()));
         } catch (Exception e) {
             throw new IllegalArgumentException("당첨 번호는 쉼표로 구분된 숫자만 입력해야 합니다.");
         }
     }
 
-    private int parseBonusNumber(String bonusInput) {
+    private static LottoNumber parseBonusNumber(String number) {
         try {
-            int value = Integer.parseInt(bonusInput.trim());
-            return LottoNumber.of(value).value();
+            return LottoNumber.of(Integer.parseInt(number.trim()));
         } catch (Exception e) {
             throw new IllegalArgumentException("보너스 볼은 공백 없이 숫자만 입력해야 합니다.");
         }
     }
 
-    private void validateWinningNumbersDistinct(List<Integer> winningNumbers) {
+    private static void validateWinningNumbersDistinct(List<LottoNumber> winningNumbers) {
         long distinctCount = winningNumbers.stream().distinct().count();
         if (distinctCount != winningNumbers.size()) {
             throw new IllegalArgumentException("당첨 번호는 중복될 수 없습니다.");
         }
     }
 
-    private void validateBonusNumberDistinct(List<Integer> winningNumbers, int bonusNumber) {
+    private static void validateBonusNumberDistinct(List<LottoNumber> winningNumbers, LottoNumber bonusNumber) {
         if (winningNumbers.contains(bonusNumber)) {
             throw new IllegalArgumentException("보너스 번호는 당첨 번호와 중복될 수 없습니다.");
         }

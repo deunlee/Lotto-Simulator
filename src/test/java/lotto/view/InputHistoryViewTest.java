@@ -1,5 +1,6 @@
 package lotto.view;
 
+import lotto.model.LottoNumber;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -9,11 +10,16 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class InputHistoryViewTest {
     private InputStream originalIn;
+    private final List<LottoNumber> winningNumbers = Stream
+        .of(1, 2, 3, 4, 5, 6)
+        .map(LottoNumber::of)
+        .toList();
 
     @BeforeEach
     void setUp() {
@@ -35,9 +41,9 @@ class InputHistoryViewTest {
         setInput("1,2,3,4,5\n1,2,3,4,5,6\n");
 
         InputHistoryView inputView = new InputHistoryView();
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
+        List<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
 
-        assertEquals(List.of(1, 2, 3, 4, 5, 6), winningNumbers);
+        assertEquals(this.winningNumbers, winningNumbers);
     }
 
     @Test
@@ -46,9 +52,9 @@ class InputHistoryViewTest {
         setInput("abc\n7\n");
 
         InputHistoryView inputView = new InputHistoryView();
-        int bonusNumber = inputView.inputBonusNumber(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = inputView.inputBonusNumber(winningNumbers);
 
-        assertEquals(7, bonusNumber);
+        assertEquals(LottoNumber.of(7), bonusNumber);
     }
 
     @Test
@@ -57,9 +63,9 @@ class InputHistoryViewTest {
         setInput("6\n7\n");
 
         InputHistoryView inputView = new InputHistoryView();
-        int bonusNumber = inputView.inputBonusNumber(List.of(1, 2, 3, 4, 5, 6));
+        LottoNumber bonusNumber = inputView.inputBonusNumber(winningNumbers);
 
-        assertEquals(7, bonusNumber);
+        assertEquals(LottoNumber.of(7), bonusNumber);
     }
 
     @Test
@@ -68,9 +74,9 @@ class InputHistoryViewTest {
         setInput("1,2,3,4,5,46\n1,2,3,4,5,6\n");
 
         InputHistoryView inputView = new InputHistoryView();
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
+        List<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
 
-        assertEquals(List.of(1, 2, 3, 4, 5, 6), winningNumbers);
+        assertEquals(this.winningNumbers, winningNumbers);
     }
 
     @Test
@@ -79,8 +85,8 @@ class InputHistoryViewTest {
         setInput("1,2,3,4,5,5\n1,2,3,4,5,6\n");
 
         InputHistoryView inputView = new InputHistoryView();
-        List<Integer> winningNumbers = inputView.inputWinningNumbers();
+        List<LottoNumber> winningNumbers = inputView.inputWinningNumbers();
 
-        assertEquals(List.of(1, 2, 3, 4, 5, 6), winningNumbers);
+        assertEquals(this.winningNumbers, winningNumbers);
     }
 }
