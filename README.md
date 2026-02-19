@@ -1,6 +1,7 @@
 # Lotto-Simulator
+> TDD 및 MVC 실습을 위한 과제입니다.
 
-## 기능 요구사항
+## Functional Requirements
 - [x] 사용자가 구입 금액 입력 (개당 1000원)
 - [x] 수동 구매 개수 입력
 - [x] 남은 금액만큼 자동으로 구입 (랜덤 생성, 숫자 범위 1 ~ 45)
@@ -8,7 +9,7 @@
 - [x] 구매한 로또 번호와 당첨 번호 비교
 - [x] 당첨 통계 및 수익률 출력
 
-## 프로그래밍 요구사항
+## Programming Requirements
 - [x] MVC 패턴 적용
 - [x] JUnit5를 이용한 TDD 적용
 - [x] indent depth는 1단계만 사용
@@ -19,7 +20,7 @@
 - [x] Collections의 shuffle() & sort() 메서드 사용
 - [x] ArrayList의 contains() 메서드 사용
 
-## TDD 테스트 케이스
+## Test Case for TDD
 <details>
 <summary>JUnit5 Test Case</summary>
 <br>
@@ -69,7 +70,10 @@
 </details>
 <br>
 
-## 실행 결과
+## Class Diagram
+![](./docs/diagram_light.png)
+
+## Execution Results
 ```
 구입금액을 입력해 주세요.
 3000
@@ -96,3 +100,6 @@
 6개 일치 (2,000,000,000원)- 0개
 총 수익률은 3.33입니다.
 ```
+
+## License
+MIT License
