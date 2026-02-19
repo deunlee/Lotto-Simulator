@@ -53,7 +53,7 @@ public class InputHistoryView {
     private int parseWinningNumber(String winningNumber) {
         try {
             int value = Integer.parseInt(winningNumber.trim());
-            return new LottoNumber(value).value();
+            return LottoNumber.of(value).value();
         } catch (Exception e) {
             throw new IllegalArgumentException("당첨 번호는 쉼표로 구분된 숫자만 입력해야 합니다.");
         }
@@ -62,7 +62,7 @@ public class InputHistoryView {
     private int parseBonusNumber(String bonusInput) {
         try {
             int value = Integer.parseInt(bonusInput.trim());
-            return new LottoNumber(value).value();
+            return LottoNumber.of(value).value();
         } catch (Exception e) {
             throw new IllegalArgumentException("보너스 볼은 공백 없이 숫자만 입력해야 합니다.");
         }

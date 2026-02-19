@@ -3,8 +3,6 @@ package lotto.model;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class LottoNumbersTest {
@@ -25,9 +23,7 @@ public class LottoNumbersTest {
     @Test
     @DisplayName("로또 번호는 비어있을 수 없다.")
     public void test_lotto_numbers_empty() {
-        assertThrows(IllegalArgumentException.class, () ->
-            new LottoNumbers(new ArrayList<>())
-        );
+        assertThrows(IllegalArgumentException.class, LottoNumbers::new);
     }
 
     @Test

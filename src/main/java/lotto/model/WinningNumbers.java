@@ -19,7 +19,7 @@ public class WinningNumbers {
             throw new IllegalArgumentException("보너스 번호는 중복될 수 없습니다.");
         }
         this.numbers = new LottoNumbers(numbers);
-        this.bonus = new LottoNumber(bonusNumber);
+        this.bonus = LottoNumber.of(bonusNumber);
     }
 
     public int getBonusNumber() {
