@@ -1,9 +1,7 @@
 package lotto.controller;
 
-import lotto.view.InputHistoryView;
-import lotto.view.InputPriceView;
-import lotto.view.InputManualView;
-import lotto.view.OutputView;
+import lotto.model.*;
+import lotto.view.*;
 
 import java.util.List;
 import java.util.Map;
@@ -11,19 +9,18 @@ import java.util.Map;
 public class LottoController {
     private static final int LOTTO_PRICE = 1000;
 
-    private final InputPriceView inputPriceView;
-    private final InputManualView inputManualView;
-    private final InputHistoryView inputHistoryView;
-    private final OutputView outputView;
-
+    private final InputPriceView       inputPriceView;
+    private final InputManualView      inputManualView;
+    private final InputHistoryView     inputHistoryView;
+    private final OutputView           outputView;
     private final LottoNumberGenerator lottoGenerator;
 
     public LottoController() {
-        inputPriceView = new InputPriceView(LOTTO_PRICE);
-        inputManualView = new InputManualView();
+        inputPriceView   = new InputPriceView(LOTTO_PRICE);
+        inputManualView  = new InputManualView();
         inputHistoryView = new InputHistoryView();
-        outputView = new OutputView();
-        lottoGenerator = new LottoNumberGenerator();
+        outputView       = new OutputView();
+        lottoGenerator   = new LottoNumberGenerator();
     }
 
     public void run() {

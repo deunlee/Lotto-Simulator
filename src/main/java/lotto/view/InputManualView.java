@@ -23,8 +23,8 @@ public class InputManualView {
             int manualCount = validateAndParseCount(countInput);
             validateManualCountRange(manualCount, maxCount);
             return manualCount;
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return inputManualCount(maxCount);
     }
@@ -47,8 +47,8 @@ public class InputManualView {
             validateLottoInputFormat(lottoInput);
             List<Integer> numbers = parseLottoNumbers(lottoInput);
             return new LottoNumbers(numbers);
-        } catch (IllegalArgumentException exception) {
-            System.out.println(exception.getMessage());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
         }
         return inputSingleLotto();
     }
@@ -59,7 +59,7 @@ public class InputManualView {
         }
         try {
             return Integer.parseInt(input);
-        } catch (NumberFormatException e) {
+        } catch (Exception e) {
             throw new IllegalArgumentException("수동 구매 개수는 공백 없이 숫자만 입력해야 합니다.");
         }
     }
@@ -78,12 +78,11 @@ public class InputManualView {
 
     private List<Integer> parseLottoNumbers(String lottoInput) {
         String[] tokens = lottoInput.split(",");
-        if (tokens.length != LOTTO_NUMBER_COUNT) {
-            throw new IllegalArgumentException("로또 번호는 6개를 입력해야 합니다.");
+        if (tokens.length != LottoNumbers.LOTTO_SIZE) {
+            throw new IllegalArgumentException("로또 번호는 숫자 " + LottoNumbers.LOTTO_SIZE + "개를 입력해야 합니다.");
         }
-
         List<Integer> numbers = new ArrayList<>();
-        for (String token : tokens) {
+        for (final String token : tokens) {
             numbers.add(Integer.parseInt(token.trim()));
         }
         return numbers;

@@ -22,24 +22,24 @@ public class OutputView {
         System.out.println("당첨 통계");
         System.out.println("---------");
         System.out.printf("3개 일치 (%s)- %d개%n",
-            formatPrize(LottoResult.RANK_FIFTH.getPrize()),
+            formatPrize(LottoResult.RANK_FIFTH),
             resultCountByRank.getOrDefault(LottoResult.RANK_FIFTH, 0));
         System.out.printf("4개 일치 (%s)- %d개%n",
-            formatPrize(LottoResult.RANK_FOURTH.getPrize()),
+            formatPrize(LottoResult.RANK_FOURTH),
             resultCountByRank.getOrDefault(LottoResult.RANK_FOURTH, 0));
         System.out.printf("5개 일치 (%s)- %d개%n",
-            formatPrize(LottoResult.RANK_THIRD.getPrize()),
+            formatPrize(LottoResult.RANK_THIRD),
             resultCountByRank.getOrDefault(LottoResult.RANK_THIRD, 0));
         System.out.printf("5개 일치, 보너스 볼 일치(%s) - %d개%n",
-            formatPrize(LottoResult.RANK_SECOND.getPrize()),
+            formatPrize(LottoResult.RANK_SECOND),
             resultCountByRank.getOrDefault(LottoResult.RANK_SECOND, 0));
         System.out.printf("6개 일치 (%s)- %d개%n",
-            formatPrize(LottoResult.RANK_FIRST.getPrize()),
+            formatPrize(LottoResult.RANK_FIRST),
             resultCountByRank.getOrDefault(LottoResult.RANK_FIRST, 0));
         System.out.printf("총 수익률은 %.2f입니다.%n", profitRate);
     }
 
-    private String formatPrize(long prize) {
-        return String.format("%,d원", prize);
+    private String formatPrize(final LottoResult result) {
+        return String.format("%,d원", result.getPrize());
     }
 }
