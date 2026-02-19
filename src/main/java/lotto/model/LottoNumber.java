@@ -1,18 +1,18 @@
 package lotto.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.IntStream;
 
-public final class LottoNumber {
+public final class LottoNumber implements Comparable<LottoNumber> {
     public static final int MIN_NUMBER = 1;
     public static final int MAX_NUMBER = 45;
 
-    private static final LottoNumber[] CACHE = new LottoNumber[MAX_NUMBER + 1];
-
-    static {
-        for (int number = MIN_NUMBER; number <= MAX_NUMBER; number++) {
-            CACHE[number] = new LottoNumber(number);
-        }
-    }
+    private static final List<LottoNumber> CACHE = IntStream
+        .rangeClosed(MIN_NUMBER, MAX_NUMBER)
+        .mapToObj(LottoNumber::new)
+        .toList();
 
     private final int value;
 
@@ -23,7 +23,7 @@ public final class LottoNumber {
 
     public static LottoNumber of(int value) {
         validateRange(value);
-        return CACHE[value];
+        return CACHE.get(value - MIN_NUMBER);
     }
 
     public int value() {
@@ -34,6 +34,15 @@ public final class LottoNumber {
         if (value < MIN_NUMBER || value > MAX_NUMBER) {
             throw new IllegalArgumentException("숫자의 범위는 1 이상 45 이하이어야 합니다.");
         }
+    }
+
+    public static ArrayList<LottoNumber> getNumberList() {
+        return new ArrayList<>(CACHE);
+    }
+
+    @Override
+    public int compareTo(LottoNumber o) {
+        return Integer.compare(value, o.value);
     }
 
     @Override

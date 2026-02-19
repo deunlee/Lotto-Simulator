@@ -7,32 +7,22 @@ import java.util.Random;
 
 public class LottoGenerator {
     private final Random random;
-    private final List<Integer> candidates = new ArrayList<>();
 
     public LottoGenerator() {
         this.random = new Random();
-        generateBaseNumbers();
     }
 
     public LottoGenerator(long seed) {
         this.random = new Random(seed);
-        generateBaseNumbers();
-    }
-
-    private void generateBaseNumbers() {
-        for (int number = LottoNumber.MIN_NUMBER; number <= LottoNumber.MAX_NUMBER; number++) {
-            candidates.add(number);
-        }
     }
 
     public LottoNumbers generate() {
         // 1 ~ 45 숫자 리스트를 랜덤하게 섞기
-        Collections.shuffle(candidates, random);
+        final ArrayList<LottoNumber> numbers = LottoNumber.getNumberList();
+        Collections.shuffle(numbers, random);
 
-        // 랜덤한 리스트의 앞 6개 숫자를 추출하고 정렬
-        List<Integer> generated = new ArrayList<>(candidates.subList(0, LottoNumbers.LOTTO_SIZE));
-        Collections.sort(generated);
-        return new LottoNumbers(generated);
+        // 랜덤한 리스트의 앞 6개 숫자를 추출
+        return new LottoNumbers(numbers.subList(0, LottoNumbers.LOTTO_SIZE));
     }
 
     public List<LottoNumbers> generate(int count) {
