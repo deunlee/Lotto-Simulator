@@ -8,11 +8,11 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class LottoNumberGeneratorTest {
+class LottoGeneratorTest {
     @Test
     @DisplayName("로또 번호 생성기는 0개 이상의 로또 번호를 생성한다.")
     public void test_generate_count() {
-        LottoNumberGenerator generator = new LottoNumberGenerator();
+        LottoGenerator generator = new LottoGenerator();
 
         assertThrows(IllegalArgumentException.class, () ->
             generator.generate(-1)
@@ -25,7 +25,7 @@ class LottoNumberGeneratorTest {
     @Test
     @DisplayName("로또 번호 생성기는 로또 당 6개의 숫자를 생성한다.")
     public void test_generate_numbers() {
-        LottoNumberGenerator generator = new LottoNumberGenerator();
+        LottoGenerator generator = new LottoGenerator();
         List<LottoNumbers> numbers = generator.generate(1);
 
         assertEquals(6, numbers.getFirst().getNumbers().size());
@@ -34,7 +34,7 @@ class LottoNumberGeneratorTest {
     @Test
     @DisplayName("로또 번호 생성기는 1 ~ 45 범위의 중복 없는 6개 숫자를 생성한다.")
     public void test_generate_single() {
-        LottoNumberGenerator generator = new LottoNumberGenerator();
+        LottoGenerator generator = new LottoGenerator();
         LottoNumbers lotto = generator.generate();
         List<Integer> numbers = lotto.getNumbers();
 
@@ -48,7 +48,7 @@ class LottoNumberGeneratorTest {
     @Test
     @DisplayName("로또 번호 생성기는 입력된 개수만큼 로또 번호를 생성한다.")
     public void test_generate_multiple() {
-        LottoNumberGenerator generator = new LottoNumberGenerator();
+        LottoGenerator generator = new LottoGenerator();
         List<LottoNumbers> lotto0 = generator.generate(0);
         List<LottoNumbers> lotto5 = generator.generate(5);
 
@@ -59,8 +59,8 @@ class LottoNumberGeneratorTest {
     @Test
     @DisplayName("로또 번호 생성기의 seed를 지정하면 결과가 재현 가능해야 한다.")
     public void test_generate_reproducible() {
-        LottoNumberGenerator firstGenerator = new LottoNumberGenerator(0L);
-        LottoNumberGenerator secondGenerator = new LottoNumberGenerator(0L);
+        LottoGenerator firstGenerator = new LottoGenerator(0L);
+        LottoGenerator secondGenerator = new LottoGenerator(0L);
 
         for (int index = 0; index < 3; index++) {
             List<Integer> firstNumbers = firstGenerator.generate().getNumbers();

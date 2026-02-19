@@ -5,16 +5,16 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
-public class LottoNumberGenerator {
+public class LottoGenerator {
     private final Random random;
     private final List<Integer> candidates = new ArrayList<>();
 
-    public LottoNumberGenerator() {
+    public LottoGenerator() {
         this.random = new Random();
         generateBaseNumbers();
     }
 
-    public LottoNumberGenerator(long seed) {
+    public LottoGenerator(long seed) {
         this.random = new Random(seed);
         generateBaseNumbers();
     }

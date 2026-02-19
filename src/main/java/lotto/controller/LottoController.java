@@ -9,18 +9,18 @@ import java.util.Map;
 public class LottoController {
     private static final int LOTTO_PRICE = 1000;
 
-    private final InputPriceView       inputPriceView;
-    private final InputManualView      inputManualView;
-    private final InputHistoryView     inputHistoryView;
-    private final OutputView           outputView;
-    private final LottoNumberGenerator lottoGenerator;
+    private final InputPriceView   inputPriceView;
+    private final InputManualView  inputManualView;
+    private final InputHistoryView inputHistoryView;
+    private final OutputView       outputView;
+    private final LottoGenerator   lottoGenerator;
 
     public LottoController() {
         inputPriceView   = new InputPriceView(LOTTO_PRICE);
         inputManualView  = new InputManualView();
         inputHistoryView = new InputHistoryView();
         outputView       = new OutputView();
-        lottoGenerator   = new LottoNumberGenerator();
+        lottoGenerator   = new LottoGenerator();
     }
 
     public void run() {
