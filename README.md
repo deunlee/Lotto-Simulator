@@ -20,7 +20,7 @@
 - [x] Collections의 shuffle() & sort() 메서드 사용
 - [x] ArrayList의 contains() 메서드 사용
 
-## Test Case for TDD
+## Test Cases for TDD
 <details>
 <summary>JUnit5 Test Case</summary>
 <br>
@@ -44,7 +44,7 @@
   * [x] 당첨 번호와 3개가 일치하면 5등으로 판정한다.
   * [x] 당첨 번호와 6개가 일치하면 1등으로 판정한다.
   * [x] 당첨 번호와 5개가 일치하면 3등으로 판정한다.
-- LottoNumberGeneratorTest
+- LottoGeneratorTest
   * [x] 로또 번호 생성기는 1 ~ 45 범위의 중복 없는 6개 숫자를 생성한다.
   * [x] 로또 번호 생성기는 로또 당 6개의 숫자를 생성한다.
   * [x] 로또 번호 생성기는 0개 이상의 로또 번호를 생성한다.
